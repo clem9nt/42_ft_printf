@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_options_id(char c)
+static int	get_option(char c)
 {
 	int	id;
 
@@ -27,20 +27,19 @@ static int	ft_options_id(char c)
 	return (id);
 }
 
-static void	ft_options(int (*option[8])(void *))
+static void	set_options(int (*option[8])(va_list))
 {
-	option[0] = (void *)ft_chr;
-	option[1] = (void *)ft_str;
-	option[2] = (void *)ft_ptr;
-	option[3] = (void *)ft_nbr;
-	option[4] = (void *)ft_uni;
-	option[5] = (void *)ft_hx1;
-	option[6] = (void *)ft_hx2;
-	option[7] = (void *)ft_pct;
+	option[0] = ft_chr;
+	option[1] = ft_str;
+	option[2] = ft_ptr;
+	option[3] = ft_nbr;
+	option[4] = ft_uni;
+	option[5] = ft_hx1;
+	option[6] = ft_hx2;
+	option[7] = ft_pct;
 }
 
-static int
-	ft_parsing(int (*option[8])(void *), const char *format, va_list args)
+static int parsing(int (*option[8])(va_list), const char *format, va_list args)
 {
 	int	ret;
 
@@ -55,21 +54,21 @@ static int
 			continue ;
 		}
 		format++;
-		ret += ((*option[ft_options_id(*format++)])(args));
+		ret += ((*option[get_option(*format++)])(args));
 	}
 	return (ret);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int		(*option[8])(void *);
+	int		(*option[8])(va_list);
 	va_list	args;
 	int		ret;
 
 	ret = 0;
-	ft_options(option);
+	set_options(option);
 	va_start(args, format);
-	ret = ft_parsing(option, format, args);
+	ret = parsing(option, format, args);
 	va_end(args);
 	return (ret);
 }

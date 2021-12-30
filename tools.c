@@ -28,12 +28,6 @@ void	ft_putnbrbase(long n, int baselen, char *base, int *len)
 
 void	ft_putnbrbase_ptr(unsigned long n, int baselen, char *base, int *len)
 {
-	if (n < 0)
-	{
-		n = -n;
-		write(1, "-", 1);
-		*len += 1;
-	}
 	if (n >= (unsigned int)baselen)
 		ft_putnbrbase_ptr(n / (unsigned long)(baselen), baselen, base, len);
 	*len += 1;
