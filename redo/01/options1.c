@@ -23,7 +23,7 @@ int	ft_chr(va_list args)
 {
 	char	chr;
 
-	chr = (char)va_arg(args, void *);
+	chr = (char)va_arg(args, int);
 	return (ft_putchar(chr));
 }
 
@@ -31,20 +31,21 @@ int	ft_str(va_list args)
 {
 	char	*str;
 
-	str = (char *)va_arg(args, void *);
+	str = (char *)va_arg(args, char *);
 	if (!str)
 		return (ft_putstr("(null)"));
 	return (ft_putstr(str));
 }
 
-/* int	ft_nbr(va_list args) */
-/* { */
-/* 	long	nb; */
-/* 	int		*len; */
-/* 	int		initlen; */
-/* 	initlen = 0; */
-/* 	len = &initlen; */
-/* 	nb = (long)va_arg(args, void *); */
-/* 	ft_putnbrbase(nb, 10, "0123456789", len); */
-/* 	return (*len); */
-/* } */
+int	ft_nbr(va_list args)
+{
+	long	nb;
+	int		*len;
+	int		l;
+
+	l = 0;
+	len = &l;
+	nb = (long)va_arg(args, int);
+	ft_putnbrbase(nb, 10, "0123456789", len);
+	return (*len);
+}

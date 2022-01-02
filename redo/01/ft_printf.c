@@ -31,12 +31,11 @@ static int	parsing(int (*option[8])(va_list), const char *fmt, va_list args)
 			id = 0 * (*fmt == '%')
 				+ 1 * (*fmt == 'c')
 				+ 2 * (*fmt == 's')
-				/* + 3 * (*fmt == 'i' || *fmt == 'd') */
-				/* + 4 * (*fmt == 'u') */
-				/* + 5 * (*fmt == 'x') */
-				/* + 6 * (*fmt == 'X') */
-				/* + 7 * (*fmt == 'p'); */
-				;
+				+ 3 * (*fmt == 'i' || *fmt == 'd')
+				+ 4 * (*fmt == 'u')
+				+ 5 * (*fmt == 'x')
+				+ 6 * (*fmt == 'X')
+				+ 7 * (*fmt == 'p');
 			ret += (*option[id])(args);
 		}
 		fmt++;
@@ -57,11 +56,11 @@ int	ft_printf(const char *fmt, ...)
 	option[0] = ft_pct;
 	option[1] = ft_chr;
 	option[2] = ft_str;
-	/* option[3] = ft_nbr; */
-	/* option[4] = ft_uni; */
-	/* option[5] = ft_hx1; */
-	/* option[6] = ft_hx2; */
-	/* option[7] = ft_ptr; */
+	option[3] = ft_nbr;
+	option[4] = ft_uni;
+	option[5] = ft_hx1;
+	option[6] = ft_hx2;
+	option[7] = ft_ptr;
 
 	va_start(args, fmt); 	//START (fmt is the last non-variadic argument of our func)
 	ret = parsing(option, fmt, args);

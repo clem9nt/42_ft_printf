@@ -7,7 +7,7 @@ SRCS = ft_printf.c \
 
 OBJS = ${SRCS:.c=.o}
 NAME = libftprintf.a
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror -c
 RM = rm -f
 
