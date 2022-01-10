@@ -33,6 +33,6 @@ int		ft_hx1(va_list args);
 int		ft_hx2(va_list args);
 int		ft_pct(va_list args);
 
-int		ft_printf(const char *format, ...);
+int		ft_printf(const char *fmt, ...);
 
 #endif

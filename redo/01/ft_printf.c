@@ -47,7 +47,7 @@ static int	parsing(int (*option[8])(va_list), const char *fmt, va_list args)
 //						  "%s", str
 int	ft_printf(const char *fmt, ...)
 {
-	int		(*option[8])(va_list); 	// notre liste d'options, prends un 'arg' et renvoie un entier
+	int		(*option[8])(va_list); 	// notre liste d'options, prends un 'va_arg' et renvoie un 'int'
 	va_list	args; 					// 'args' contiendra tous les arguments
 	int		ret; 					// valeur de retour de printf
 
@@ -62,8 +62,9 @@ int	ft_printf(const char *fmt, ...)
 	option[6] = ft_hx2;
 	option[7] = ft_ptr;
 
-	va_start(args, fmt); 	//START (fmt is the last non-variadic argument of our func)
+	va_start(args, fmt); 	// START (fmt is the lase non-variadic arg of our func)
 	ret = parsing(option, fmt, args);
-	va_end(args); 			//END 	(now args is undefined)
+	va_end(args); 			// END 	(now args is undefined)
+
 	return (ret);
 }
