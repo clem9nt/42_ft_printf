@@ -1,59 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   options1.c                                         :+:      :+:    :+:   */
+/*   options_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 10:12:06 by cvidon            #+#    #+#             */
-/*   Updated: 2021/12/03 10:12:07 by cvidon           ###   ########.fr       */
+/*   Created: 2021/12/03 10:11:59 by cvidon            #+#    #+#             */
+/*   Updated: 2022/01/18 17:19:16 by cvidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
-int	ft_uni(va_list args)
+int	ft_uns(va_list args)
 {
 	unsigned int	nb;
-	int				*len;
-	int				l;
+	int				ret;
+	int				*ptr;
 
-	l = 0;
-	len = &l;
+	ret = 0;
+	ptr = &ret;
 	nb = va_arg(args, unsigned int);
-	ft_putnbrbase(nb, 10, "0123456789", len);
-	return (*len);
+	ft_putnbr_base(nb, 10, "0123456789", &ret);
+	return (ret);
 }
 
 int	ft_hx1(va_list args)
 {
 	unsigned int	nb;
-	int				*len;
-	int				l;
+	int				ret;
+	int				*ptr;
 
-	l = 0;
-	len = &l;
+	ret = 0;
+	ptr = &ret;
 	nb = va_arg(args, unsigned int);
-	ft_putnbrbase(nb, 16, "0123456789abcdef", len);
-	return (*len);
+	ft_putnbr_base(nb, 16, "0123456789abcdef", &ret);
+	return (ret);
 }
 
 int	ft_hx2(va_list args)
 {
 	unsigned int	nb;
-	int				*len;
-	int				l;
+	int				ret;
+	int				*ptr;
 
-	l = 0;
-	len = &l;
+	ret = 0;
+	ptr = &ret;
 	nb = va_arg(args, unsigned int);
-	ft_putnbrbase(nb, 16, "0123456789ABCDEF", len);
-	return (*len);
+	ft_putnbr_base(nb, 16, "0123456789ABCDEF", ptr);
+	return (ret);
 }
 
-int	ft_pct(va_list args)
+int	ft_ptr(va_list args)
 {
-	(void)args;
-	ft_putchar('%');
-	return (1);
+	int				ret;
+	int				*ptr;
+	unsigned long	nb;
+
+	ret = (int)write(1, "0x", 2);
+	ptr = &ret;
+	nb = va_arg(args, unsigned long);
+	ft_putnbr_base_ptr(nb, 16, "0123456789abcdef", &ret);
+	return (ret);
 }

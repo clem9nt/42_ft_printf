@@ -1,9 +1,9 @@
 .PHONY: all clean fclean re
 
-SRCS = ft_printf.c \
-	   options1.c  \
-	   options2.c  \
-	   tools.c     \
+SRCS = ft_printf.c	\
+	   options_1.c  \
+	   options_2.c  \
+	   utils.c     	\
 
 OBJS = ${SRCS:.c=.o}
 NAME = libftprintf.a

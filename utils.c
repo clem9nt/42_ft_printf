@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,25 +11,33 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-/*
- * Test
- */
+/* Int-putchar is useless because write has a ret value */
 
-int	main(void)
+size_t	ft_strlen(char *str)
 {
-	int		ret0;
-	int		ret1;
-	char	*s;
-	char	*null;
+	size_t	i;
 
-	s = "s";
-	null = NULL;
-	ret0 = 0;
-	ret1 = 0;
-	ret0 = ft_printf("salut %% %c %s %s %i %u %x %p\n",
-			'c', s, null, 42, -42, -42, s);
-	ret1 = printf("salut %% %c %s %s %i %u %x %p\n",
-			'c', s, null, 42, -42, -42, s);
-	printf("%i == %i", ret0, ret1);
-	return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void	ft_putnbr_base(long nb, int baselen, char *base, int *ret)
+{
+	if (nb < 0)
+	{
+		nb = -nb;
+		*ret += write(1, "-", 1);
+	}
+	if (nb >= baselen)
+		ft_putnbr_base(nb / baselen, baselen, base, ret);
+	*ret += write(1, &base[nb % baselen], 1);
+}
+
+void	ft_putnbr_base_ptr(unsigned long nb, int baselen, char *base, int *ret)
+{
+	if (nb >= (unsigned long)baselen)
+		ft_putnbr_base_ptr(nb / (unsigned long)baselen, baselen, base, ret);
+	*ret += write(1, &base[nb % (unsigned long)baselen], 1);
 }

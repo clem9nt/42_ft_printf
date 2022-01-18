@@ -6,69 +6,64 @@
 /*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 10:11:59 by cvidon            #+#    #+#             */
-/*   Updated: 2021/12/07 16:19:16 by cvidon           ###   ########.fr       */
+/*   Updated: 2022/01/18 17:19:16 by cvidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
-static int	get_option(char c)
-{
-	int	id;
+/*
+ * Read and parse the input
+ */
 
-	id = 0 * (c == 'c')
-		+ 1 * (c == 's')
-		+ 2 * (c == 'p')
-		+ 3 * (c == 'i' || c == 'd')
-		+ 4 * (c == 'u')
-		+ 5 * (c == 'x')
-		+ 6 * (c == 'X')
-		+ 7 * (c == '%');
-	return (id);
-}
-
-static void	set_options(int (*option[8])(va_list))
-{
-	option[0] = ft_chr;
-	option[1] = ft_str;
-	option[2] = ft_ptr;
-	option[3] = ft_nbr;
-	option[4] = ft_uni;
-	option[5] = ft_hx1;
-	option[6] = ft_hx2;
-	option[7] = ft_pct;
-}
-
-static int parsing(int (*option[8])(va_list), const char *format, va_list args)
+int	ft_read(int (*options[8])(va_list), const char *fmt, va_list args)
 {
 	int	ret;
+	int	id;
 
 	ret = 0;
-	while (*format)
+	while (*fmt)
 	{
-		if (*format != '%')
+		if (*fmt != '%')
+			ret += write(1, fmt++, 1);
+		else
 		{
-			ft_putchar(*format);
-			ret++;
-			format++;
-			continue ;
+			fmt++;
+			id = 0 * (*fmt == '%')
+				+ 1 * (*fmt == 'c')
+				+ 2 * (*fmt == 's')
+				+ 3 * (*fmt == 'i' | *fmt == 'd')
+				+ 4 * (*fmt == 'u')
+				+ 5 * (*fmt == 'x')
+				+ 6 * (*fmt == 'X')
+				+ 7 * (*fmt == 'p')
+				;
+			ret += options[id](args);
+			fmt++;
 		}
-		format++;
-		ret += ((*option[get_option(*format++)])(args));
 	}
 	return (ret);
 }
 
-int	ft_printf(const char *format, ...)
+/*
+ * Initialize the supported flags
+ */
+
+int	ft_printf(const char *fmt, ...)
 {
-	int		(*option[8])(va_list);
+	int		(*options[8])(va_list);
 	va_list	args;
 	int		ret;
 
-	ret = 0;
-	set_options(option);
-	va_start(args, format);
-	ret = parsing(option, format, args);
+	options[0] = ft_pct;
+	options[1] = ft_chr;
+	options[2] = ft_str;
+	options[3] = ft_nbr;
+	options[4] = ft_uns;
+	options[5] = ft_hx1;
+	options[6] = ft_hx2;
+	options[7] = ft_ptr;
+	va_start(args, fmt);
+	ret = ft_read(options, fmt, args);
 	va_end(args);
 	return (ret);
 }
