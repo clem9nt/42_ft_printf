@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC = clang$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror -c$/;"	m
+FT_PRINTF_H	ft_printf.h	/^# define FT_PRINTF_H$/;"	d
+NAME	Makefile	/^NAME = libftprintf.a$/;"	m
+OBJS	Makefile	/^OBJS = ${SRCS:.c=.o}$/;"	m
+RM	Makefile	/^RM = rm -f$/;"	m
+SRCS	Makefile	/^SRCS = ft_printf.c \\$/;"	m
+ft_chr	options_1.c	/^int	ft_chr(va_list args)$/;"	f
+ft_hx1	options_2.c	/^int	ft_hx1(va_list args)$/;"	f
+ft_hx2	options_2.c	/^int	ft_hx2(va_list args)$/;"	f
+ft_nbr	options_1.c	/^int	ft_nbr(va_list args)$/;"	f
+ft_pct	options_1.c	/^int	ft_pct(va_list args)$/;"	f
+ft_printf	ft_printf.c	/^int	ft_printf(const char *fmt, ...)$/;"	f
+ft_ptr	options_2.c	/^int	ft_ptr(va_list args)$/;"	f
+ft_putnbr_base	utils.c	/^void	ft_putnbr_base(long nb, int baselen, char *base, int *ret)$/;"	f
+ft_putnbr_base_ptr	utils.c	/^void	ft_putnbr_base_ptr(unsigned long nb, int baselen, char *base, int *ret)$/;"	f
+ft_read	ft_printf.c	/^int	ft_read(int (*options[8])(va_list), const char *fmt, va_list args)$/;"	f
+ft_str	options_1.c	/^int	ft_str(va_list args)$/;"	f
+ft_strlen	utils.c	/^size_t	ft_strlen(char *str)$/;"	f
+ft_uns	options_2.c	/^int	ft_uns(va_list args)$/;"	f
+main	main.c	/^int	main(void)$/;"	f
