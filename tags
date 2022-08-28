@@ -3,25 +3,33 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 CC	Makefile	/^CC = clang$/;"	m
-CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror -c$/;"	m
-FT_PRINTF_H	ft_printf.h	/^# define FT_PRINTF_H$/;"	d
+CC	Makefile	/^san_addr: CC := gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror -Wconversion -Wsign-conversion -c$/;"	m
+CFLAGS	Makefile	/^everything: CFLAGS := -Weverything$/;"	m
+CFLAGS	Makefile	/^san_addr: CFLAGS := $(CFLAGS) -g -fsanitize=address,undefined,signed-integer-overflow$/;"	m
+CLS	Makefile	/^CLS			= \\r\\033[K$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS = -I include$/;"	m
+INC_DIR	Makefile	/^INC_DIR		= include$/;"	m
+MAKE	Makefile	/^MAKE		= make -C$/;"	m
+MUTE	Makefile	/^MUTE		= 1>\/dev\/null 2>\/dev\/null$/;"	m
 NAME	Makefile	/^NAME = libftprintf.a$/;"	m
-OBJS	Makefile	/^OBJS = ${SRCS:.c=.o}$/;"	m
-RM	Makefile	/^RM = rm -f$/;"	m
+OBJS	Makefile	/^OBJS := $(SRCS:.c=.o)$/;"	m
+RM	Makefile	/^RM			= rm -rf$/;"	m
+SRCS	Makefile	/^SRCS := $(SRCS:%=$(SRC_DIR)\/%)$/;"	m
 SRCS	Makefile	/^SRCS = ft_printf.c \\$/;"	m
-ft_chr	options_1.c	/^int	ft_chr(va_list args)$/;"	f
-ft_hx1	options_2.c	/^int	ft_hx1(va_list args)$/;"	f
-ft_hx2	options_2.c	/^int	ft_hx2(va_list args)$/;"	f
-ft_nbr	options_1.c	/^int	ft_nbr(va_list args)$/;"	f
-ft_pct	options_1.c	/^int	ft_pct(va_list args)$/;"	f
-ft_printf	ft_printf.c	/^int	ft_printf(const char *fmt, ...)$/;"	f
-ft_ptr	options_2.c	/^int	ft_ptr(va_list args)$/;"	f
-ft_putnbr_base	utils.c	/^void	ft_putnbr_base(long nb, int baselen, char *base, int *ret)$/;"	f
-ft_putnbr_base_ptr	utils.c	/^void	ft_putnbr_base_ptr(unsigned long nb, int baselen, char *base, int *ret)$/;"	f
-ft_read	ft_printf.c	/^int	ft_read(int (*options[8])(va_list), const char *fmt, va_list args)$/;"	f
-ft_str	options_1.c	/^int	ft_str(va_list args)$/;"	f
-ft_strlen	utils.c	/^size_t	ft_strlen(char *str)$/;"	f
-ft_uns	options_2.c	/^int	ft_uns(va_list args)$/;"	f
+SRC_DIR	Makefile	/^SRC_DIR		= src$/;"	m
+ft_chr	src/options_1.c	/^int	ft_chr(va_list args)$/;"	f
+ft_hx1	src/options_2.c	/^int	ft_hx1(va_list args)$/;"	f
+ft_hx2	src/options_2.c	/^int	ft_hx2(va_list args)$/;"	f
+ft_nbr	src/options_1.c	/^int	ft_nbr(va_list args)$/;"	f
+ft_pct	src/options_1.c	/^int	ft_pct(va_list args)$/;"	f
+ft_printf	src/ft_printf.c	/^int	ft_printf(const char *fmt, ...)$/;"	f
+ft_ptr	src/options_2.c	/^int	ft_ptr(va_list args)$/;"	f
+ft_putnbr	src/utils.c	/^void	ft_putnbr(int n, ssize_t *r)$/;"	f
+ft_putuns_base	src/utils.c	/^void	ft_putuns_base(size_t nb, size_t baselen, char *base, ssize_t *r)$/;"	f
+ft_read	src/ft_printf.c	/^static int	ft_read(int (*opt[8])(va_list), const char *fmt, va_list args)$/;"	f	file:
+ft_str	src/options_1.c	/^int	ft_str(va_list args)$/;"	f
+ft_uns	src/options_2.c	/^int	ft_uns(va_list args)$/;"	f
 main	main.c	/^int	main(void)$/;"	f

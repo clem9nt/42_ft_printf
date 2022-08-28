@@ -12,54 +12,64 @@
 
 #include "ft_printf.h"
 
+/*
+ ** @brief		'%u'
+ */
+
 int	ft_uns(va_list args)
 {
 	unsigned int	nb;
-	int				ret;
-	int				*ptr;
+	ssize_t			r;
 
-	ret = 0;
-	ptr = &ret;
-	nb = va_arg(args, unsigned int);
-	ft_putnbr_base(nb, 10, "0123456789", &ret);
-	return (ret);
+	r = 0;
+	nb = va_arg (args, unsigned int);
+	ft_putuns_base (nb, 10, "0123456789", &r);
+	return ((int)r);
 }
+
+/*
+ ** @brief		'%x'
+ */
 
 int	ft_hx1(va_list args)
 {
 	unsigned int	nb;
-	int				ret;
-	int				*ptr;
+	ssize_t			r;
 
-	ret = 0;
-	ptr = &ret;
-	nb = va_arg(args, unsigned int);
-	ft_putnbr_base(nb, 16, "0123456789abcdef", &ret);
-	return (ret);
+	r = 0;
+	nb = va_arg (args, unsigned int);
+	ft_putuns_base (nb, 16, "0123456789abcdef", &r);
+	return ((int)r);
 }
+
+/*
+ ** @brief		'%X'
+ */
 
 int	ft_hx2(va_list args)
 {
 	unsigned int	nb;
-	int				ret;
-	int				*ptr;
+	ssize_t			r;
 
-	ret = 0;
-	ptr = &ret;
-	nb = va_arg(args, unsigned int);
-	ft_putnbr_base(nb, 16, "0123456789ABCDEF", ptr);
-	return (ret);
+	r = 0;
+	nb = va_arg (args, unsigned int);
+	ft_putuns_base (nb, 16, "0123456789ABCDEF", &r);
+	return ((int)r);
 }
+
+/*
+ ** @brief		'%p'
+ */
 
 int	ft_ptr(va_list args)
 {
-	int				ret;
-	int				*ptr;
 	unsigned long	nb;
+	ssize_t			r;
 
-	ret = (int)write(1, "0x", 2);
-	ptr = &ret;
-	nb = va_arg(args, unsigned long);
-	ft_putnbr_base_ptr(nb, 16, "0123456789abcdef", &ret);
-	return (ret);
+	nb = va_arg (args, unsigned long);
+	if (!nb)
+		return ((int)write (1, "(nil)", 5));
+	r = (int)write (1, "0x", 2);
+	ft_putuns_base (nb, 16, "0123456789abcdef", &r);
+	return ((int)r);
 }

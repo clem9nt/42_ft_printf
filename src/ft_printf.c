@@ -16,33 +16,33 @@
  * Read and parse the input
  */
 
-int	ft_read(int (*options[8])(va_list), const char *fmt, va_list args)
+static int	ft_read(int (*opt[8])(va_list), const char *fmt, va_list args)
 {
-	int	ret;
+	int	r;
 	int	id;
 
-	ret = 0;
+	r = 0;
 	while (*fmt)
 	{
 		if (*fmt != '%')
-			ret += write(1, fmt++, 1);
-		else
+			r += (int) write (1, fmt, 1);
+		else if (*(fmt + 1))
 		{
 			fmt++;
 			id = 0 * (*fmt == '%')
 				+ 1 * (*fmt == 'c')
 				+ 2 * (*fmt == 's')
-				+ 3 * (*fmt == 'i' | *fmt == 'd')
+				+ 3 * (*fmt == 'i' || *fmt == 'd')
 				+ 4 * (*fmt == 'u')
 				+ 5 * (*fmt == 'x')
 				+ 6 * (*fmt == 'X')
 				+ 7 * (*fmt == 'p')
 				;
-			ret += options[id](args);
-			fmt++;
+			r += opt[id](args);
 		}
+		fmt++;
 	}
-	return (ret);
+	return (r);
 }
 
 /*
@@ -51,20 +51,20 @@ int	ft_read(int (*options[8])(va_list), const char *fmt, va_list args)
 
 int	ft_printf(const char *fmt, ...)
 {
-	int		(*options[8])(va_list);
+	int		(*opt[8])(va_list);
 	va_list	args;
-	int		ret;
+	int		r;
 
-	options[0] = ft_pct;
-	options[1] = ft_chr;
-	options[2] = ft_str;
-	options[3] = ft_nbr;
-	options[4] = ft_uns;
-	options[5] = ft_hx1;
-	options[6] = ft_hx2;
-	options[7] = ft_ptr;
-	va_start(args, fmt);
-	ret = ft_read(options, fmt, args);
-	va_end(args);
-	return (ret);
+	opt[0] = ft_pct;
+	opt[1] = ft_chr;
+	opt[2] = ft_str;
+	opt[3] = ft_nbr;
+	opt[4] = ft_uns;
+	opt[5] = ft_hx1;
+	opt[6] = ft_hx2;
+	opt[7] = ft_ptr;
+	va_start (args, fmt);
+	r = ft_read (opt, fmt, args);
+	va_end (args);
+	return (r);
 }

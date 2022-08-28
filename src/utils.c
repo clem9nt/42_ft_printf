@@ -12,33 +12,44 @@
 
 #include "ft_printf.h"
 
-/* Int-putchar is useless because write has a ret value */
+/*
+ ** @brief      Output number.
+ **
+ ** @param[in]  nb a numeric value.
+ ** @param[out] r the outputted characters count.
+ */
 
-size_t	ft_strlen(char *str)
+void	ft_putnbr(int n, ssize_t *r)
 {
-	size_t	i;
+	long	ln;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_putnbr_base(long nb, int baselen, char *base, int *ret)
-{
-	if (nb < 0)
+	ln = n;
+	if (ln < 0)
 	{
-		nb = -nb;
-		*ret += write(1, "-", 1);
+		ln = -ln;
+		*r += write (1, "-", 1);
 	}
-	if (nb >= baselen)
-		ft_putnbr_base(nb / baselen, baselen, base, ret);
-	*ret += write(1, &base[nb % baselen], 1);
+	if (ln >= 10)
+		ft_putnbr ((int)(ln / 10), r);
+	*r += write (1, &"0123456789"[ln % 10], 1);
 }
 
-void	ft_putnbr_base_ptr(unsigned long nb, int baselen, char *base, int *ret)
+/*
+ ** @brief      Output unsigned number in specified base.
+ **
+ ** Example:
+ ** ft_putuns_base (42, 16, "0123456789abcdef", &r);
+ ** >> 2a
+ **
+ ** @param[in]  nb a numeric value.
+ ** @param[in]  baselen the length of the base (ie. 10).
+ ** @param[in]  base the character set of the base (ie. 0123456789).
+ ** @param[out] r the outputted characters count.
+ */
+
+void	ft_putuns_base(size_t nb, size_t baselen, char *base, ssize_t *r)
 {
-	if (nb >= (unsigned long)baselen)
-		ft_putnbr_base_ptr(nb / (unsigned long)baselen, baselen, base, ret);
-	*ret += write(1, &base[nb % (unsigned long)baselen], 1);
+	if (nb >= baselen)
+		ft_putuns_base (nb / baselen, baselen, base, r);
+	*r += write(1, &base[nb % baselen], 1);
 }

@@ -13,28 +13,49 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-/* Prod */
+/*
+ ** =========[ Includes ]==========
+ */
+
 # include <stdarg.h>
 # include <unistd.h>
 
-/* Dev */
-# include <stdio.h>
+/*
+ ** =========[ Prototypes ]========
+ */
 
-/* utils.c */
-size_t	ft_strlen(char *str);
-void	ft_putnbr_base(long nb, int baselen, char *base, int *ret);
-void	ft_putnbr_base_ptr(unsigned long nb, int baselen, char *base, int *ret);
-/* options_1.c */
+/*
+ ** utils.c
+ */
+
+void	ft_putnbr(int n, ssize_t *r);
+void	ft_putuns_base(size_t nb, size_t baselen, char *base, ssize_t *r);
+
+/*
+ ** options_2.c
+ */
+
 int		ft_pct(va_list args);
 int		ft_chr(va_list args);
 int		ft_str(va_list args);
 int		ft_nbr(va_list args);
-/* options_2.c */
+
+/*
+ ** options_1.c
+ */
+
 int		ft_uns(va_list args);
 int		ft_hx1(va_list args);
 int		ft_hx2(va_list args);
 int		ft_ptr(va_list args);
-/* ft_printf.c */
+
+/*
+ ** ft_printf.c
+ **
+ ** Format and print data.
+ */
+
+/* static int ft_read(int (*opt[8])(va_list), const char *fmt, va_list args) */
 int		ft_printf(const char *fmt, ...);
 
 #endif

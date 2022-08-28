@@ -12,39 +12,58 @@
 
 #include "ft_printf.h"
 
+/*
+ ** @brief		'%%'
+ */
+
 int	ft_pct(va_list args)
 {
 	(void)args;
-	return ((int)write(1, "%", 1));
+	return ((int)write (1, "%", 1));
 }
+
+/*
+ ** @brief		'%c'
+ */
 
 int	ft_chr(va_list args)
 {
 	char	c;
 
-	c = (char) va_arg(args, int);
-	return ((int)write(1, &c, 1));
+	c = (char) va_arg (args, int);
+	return ((int)write (1, &c, 1));
 }
+
+/*
+ ** @brief		'%s'
+ */
 
 int	ft_str(va_list args)
 {
 	char	*str;
+	ssize_t	r;
 
-	str = va_arg(args, char *);
+	r = 0;
+	str = va_arg (args, char *);
 	if (!str)
-		return ((int)write(1, "(null)", 6));
-	return ((int)write(1, str, ft_strlen(str)));
+		r = write (1, "(null)", 6);
+	else
+		while (str[r])
+			r += write (1, &str[r], 1);
+	return ((int)r);
 }
+
+/*
+ ** @brief		'%i' and '%d'
+ */
 
 int	ft_nbr(va_list args)
 {
 	int	nb;
-	int	ret;
-	int	*ptr;
+	ssize_t	r;
 
-	ret = 0;
-	ptr = &ret;
-	nb = va_arg(args, int);
-	ft_putnbr_base(nb, 10, "0123456789", &ret);
-	return (ret);
+	r = 0;
+	nb = va_arg (args, int);
+	ft_putnbr (nb, &r);
+	return ((int)r);
 }
