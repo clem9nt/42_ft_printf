@@ -4,22 +4,16 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-CC	Makefile	/^CC = clang$/;"	m
-CC	Makefile	/^san_addr: CC := gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror -Wconversion -Wsign-conversion -c$/;"	m
-CFLAGS	Makefile	/^everything: CFLAGS := -Weverything$/;"	m
-CFLAGS	Makefile	/^san_addr: CFLAGS := $(CFLAGS) -g -fsanitize=address,undefined,signed-integer-overflow$/;"	m
-CLS	Makefile	/^CLS			= \\r\\033[K$/;"	m
-CPPFLAGS	Makefile	/^CPPFLAGS = -I include$/;"	m
-INC_DIR	Makefile	/^INC_DIR		= include$/;"	m
-MAKE	Makefile	/^MAKE		= make -C$/;"	m
-MUTE	Makefile	/^MUTE		= 1>\/dev\/null 2>\/dev\/null$/;"	m
-NAME	Makefile	/^NAME = libftprintf.a$/;"	m
-OBJS	Makefile	/^OBJS := $(SRCS:.c=.o)$/;"	m
-RM	Makefile	/^RM			= rm -rf$/;"	m
-SRCS	Makefile	/^SRCS := $(SRCS:%=$(SRC_DIR)\/%)$/;"	m
-SRCS	Makefile	/^SRCS = ft_printf.c \\$/;"	m
-SRC_DIR	Makefile	/^SRC_DIR		= src$/;"	m
+CC	Makefile	/^CC			:= clang$/;"	m
+CC	Makefile	/^sana: CC		:= gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS		:= -Wall -Wextra -Werror -c$/;"	m
+CLS	Makefile	/^CLS			:= \\r\\033[K$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS	:= -I include$/;"	m
+MUTE	Makefile	/^MUTE		:= 1>\/dev\/null$/;"	m
+NAME	Makefile	/^NAME		:= libftprintf.a$/;"	m
+OBJS	Makefile	/^OBJS		:= $(SRCS:.c=.o)$/;"	m
+RM	Makefile	/^RM			:= rm -rf$/;"	m
+SRCS	Makefile	/^SRCS		:= \\$/;"	m
 ft_chr	src/options_1.c	/^int	ft_chr(va_list args)$/;"	f
 ft_hx1	src/options_2.c	/^int	ft_hx1(va_list args)$/;"	f
 ft_hx2	src/options_2.c	/^int	ft_hx2(va_list args)$/;"	f

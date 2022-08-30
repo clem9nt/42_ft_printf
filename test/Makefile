@@ -1,54 +1,102 @@
-# @author   cvidon@42
-# @brief    Makefile for C programs compiling with a library.
+# @file     Makefile
+# @brief    Simple Makefile for C lib tester.
+# @author   clemedon (Clément Vidon)
 
-NAME		= printfest
-LIBFTPRINTF	= ..
+NAME		:= printfest
+LIB			:= ..
 
-CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -Wconversion
+#------------------------------------------------#
+#   INGREDIENTS                                  #
+#------------------------------------------------#
+# CC        compiler
+# CFLAGS    compiler flags
+# CPPFLAGS  preprocessor flags
+# SRCS      source files
+# OBJS      object files
 
-CPPFLAGS	= -I $(LIBFTPRINTF)/include
-LDFLAGS		= -L $(LIBFTPRINTF)
-LDLIBS		= -l ftprintf
-
-SRCS		= printfest.c
+CC			:= clang
+CFLAGS		:= -Wall -Wextra -Werror
+CPPFLAGS	:= -I $(LIB)/include
+LDFLAGS		:= -L $(LIB)
+LDLIBS		:= -l ftprintf
+SRCS		:= printfest.c
 OBJS		:= $(SRCS:%.c=%.o)
 
-RM			= rm -rf
-MAKE		= make -C
-MUTE		= 1>/dev/null 2>/dev/null
-CLS			= \r\033[K
+#------------------------------------------------#
+#   UTENSILS                                     #
+#------------------------------------------------#
+# RM        cleaning command
+# MAKE      other Makefile call command
+# RULE      other Makefile call rule
+# VALGRIND  valgrind command
+# CLS       clear the current line
+# MUTE      mute the stdout
+
+RM			:= rm -rf
+MAKE		:= make --directory
+RULE		:= all
+VALGRIND	:= valgrind -q --leak-check=yes --show-leak-kinds=all
+CLS			:= \r\033[K
+MUTE		:= 1>/dev/null
+
+#------------------------------------------------#
+#   RECIPES                                      #
+#------------------------------------------------#
+# all       build all targets
+# $(NAME)   build $(NAME) target
+# clean     remove objects
+# fclean    remove objects and binary
+# re        remove objects and binary and rebuild all
+
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
-	@echo "$(CLS)>>> SUCCESS <<<"
+	@echo "$(CLS)$(NAME) created."
 
 %.o: %.c
-	@echo -n "$(CLS)Building printfest..."
+	@echo -n "$(CLS)Building $(NAME)..."
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	@echo -n "$(CLS)Building libftprintf..."
-	@$(MAKE) $(LIBFTPRINTF) $(MUTE)
+	@$(MAKE) $(LIB) $(RULE) $(MUTE)
 
 clean:
-	@$(MAKE) $(LIBFTPRINTF) clean $(MUTE)
+	@$(MAKE) $(LIB) clean $(MUTE)
 	@$(RM) $(OBJS)
 
 fclean: clean
-	@$(MAKE) $(LIBFTPRINTF) fclean $(MUTE)
+	@$(MAKE) $(LIB) fclean $(MUTE)
 	@$(RM) $(NAME)
 
 re: fclean all
 
-san_thread: CC := gcc
-san_thread: CFLAGS := $(CFLAGS) -g -fsanitize=thread,undefined,signed-integer-overflow
-san_thread: $(NAME)
+#------------------------------------------------#
+#   CUSTOM RECIPES                               #
+#------------------------------------------------#
+# sana          memory corruption debugging
+# ansi          ANSI Std89 compliance
+# every         explore new warnings
+# info          standard build output
+# run           run the program
 
-everthing: CFLAGS := -Weverything
-everthing: $(NAME)
+.PHONY: sana ansi every info run
 
-test: re
-	@./$(NAME) || true
+sana: CC		:= gcc
+sana: RULE		:= sana
+sana: CFLAGS	+= -g -fsanitize=address,undefined,signed-integer-overflow
+sana: $(NAME)
 
-.PHONY: all clean fclean re san_thread
+ansi: CFLAGS	+= -W -Wcast-qual -Wcomma -Wconversion -Wsign-conversion -Wwrite-strings -pedantic -std=c89
+ansi: RULE		:= ansi
+ansi: $(NAME)
+
+every: CFLAGS	+= -Weverything
+every: RULE		:= every
+every: $(NAME)
+
+info: fclean
+	@make --dry-run | grep -v "echo.*\".*\"\|\[.*\]"
+
+run: re
+	@$(VALGRIND) ./$(NAME) || true

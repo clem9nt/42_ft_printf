@@ -1,4 +1,26 @@
-err
-printfTester
+# Build #
+###################
+*.o
+*.d
+*.a
+
+# Code Editor #
+###############
+*.swo
+*.swp
+*~
+
+# OSX Generated Files #
+#######################
+.DS_*
+.Spot*
+.Trash*
+._*
+.fseve*
+
+# Other #
+#########
+*.nfs*
+printfest
 a.out
 tags
