@@ -18,6 +18,8 @@
 > You will mainly learn about using a variable number of arguments.*
 > [Subject](https://cdn.intra.42.fr/pdf/pdf/58827/en.subject.pdf)
 
+External functions: `write`, `va_start`, `va_arg`, `va_end`
+
 The code is written in accordance with **42 C** coding style,  **ANSI C89** compliant and entirely **documented with docstrings**.
 
 ## Usage
