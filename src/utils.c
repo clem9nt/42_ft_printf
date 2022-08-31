@@ -47,7 +47,7 @@ void	ft_putnbr(int n, ssize_t *r)
  ** @param[out] r the outputted characters count.
  */
 
-void	ft_putuns_base(size_t nb, size_t baselen, char *base, ssize_t *r)
+void	ft_putuns_base(size_t nb, size_t baselen, const char *base, ssize_t *r)
 {
 	if (nb >= baselen)
 		ft_putuns_base (nb / baselen, baselen, base, r);

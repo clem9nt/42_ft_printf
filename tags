@@ -22,7 +22,7 @@ ft_pct	src/options_1.c	/^int	ft_pct(va_list args)$/;"	f
 ft_printf	src/ft_printf.c	/^int	ft_printf(const char *fmt, ...)$/;"	f
 ft_ptr	src/options_2.c	/^int	ft_ptr(va_list args)$/;"	f
 ft_putnbr	src/utils.c	/^void	ft_putnbr(int n, ssize_t *r)$/;"	f
-ft_putuns_base	src/utils.c	/^void	ft_putuns_base(size_t nb, size_t baselen, char *base, ssize_t *r)$/;"	f
+ft_putuns_base	src/utils.c	/^void	ft_putuns_base(size_t nb, size_t baselen, const char *base, ssize_t *r)$/;"	f
 ft_read	src/ft_printf.c	/^static int	ft_read(int (*opt[8])(va_list), const char *fmt, va_list args)$/;"	f	file:
 ft_str	src/options_1.c	/^int	ft_str(va_list args)$/;"	f
 ft_uns	src/options_2.c	/^int	ft_uns(va_list args)$/;"	f

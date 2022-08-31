@@ -31,7 +31,7 @@
  */
 
 void	ft_putnbr(int n, ssize_t *r);
-void	ft_putuns_base(size_t nb, size_t baselen, char *base, ssize_t *r);
+void	ft_putuns_base(size_t nb, size_t baselen, const char *base, ssize_t *r);
 
 /*
  ** options_2.c

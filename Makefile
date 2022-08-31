@@ -33,6 +33,7 @@ OBJS		:= $(SRCS:.c=.o)
 # MUTE      mute the stdout
 
 RM			:= rm -rf
+
 CLS			:= \r\033[K
 MUTE		:= 1>/dev/null
 
@@ -69,7 +70,7 @@ re: fclean all
 #   CUSTOM RECIPES                               #
 #------------------------------------------------#
 # sana          memory corruption debugging
-# ansi          ANSI Std89 compliance
+# ansi          ANSI c89 compliance
 # every         explore new warnings
 # update        update the repository
 # norm          42 C coding style compliance
