@@ -20,7 +20,7 @@
 
 External functions: `write`, `va_start`, `va_arg`, `va_end`
 
-The code is written in accordance with **42 C** coding style,  **ANSI C89** compliant and entirely **documented with docstrings**.
+Code written in accordance with **42 C** coding style,  **ANSI C89** compliant and entirely **documented with docstrings**.
 
 ## Usage
 
