@@ -39,7 +39,7 @@ void	ft_putnbr(int n, ssize_t *r)
  **
  ** Example:
  ** ft_putuns_base (42, 16, "0123456789abcdef", &r);
- ** >> 2a
+ ** > 2a
  **
  ** @param[in]  nb a numeric value.
  ** @param[in]  baselen the length of the base (ie. 10).

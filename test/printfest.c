@@ -54,7 +54,7 @@ int	main(void)
 	ret = fprintf(stdout, "%X %X %X %X %X %X", 'X', 0, 42, -42, INT_MIN, INT_MAX); RET;
 	fprintf(stdout, "\n  ---PTR---\n\n");
 	ret = ft_printf ("%p %p %p", (void *)null, (void *)&ret, NULL); RET;
-	ret = fprintf(stdout, "%p %p %p", (void *)null, (void *)&ret, NULL); RET;
+	ret = fprintf(stdout, "%p %p", (void *)null, (void *)&ret); RET;
 	fprintf(stdout, "\n  ---MIX---\n\n");
 	ret = ft_printf ("- %% %c %s %i %u %x %X %x %p ", 97, "b", 0, -1, -2, -3, -4, (void *)null); RET;
 	ret = fprintf(stdout, "- %% %c %s %i %u %x %X %x %p ", 97, "b", 0, -1, -2, -3, -4, (void *)null); RET;

@@ -13,10 +13,16 @@
 #include "ft_printf.h"
 
 /*
- * Read and parse the input
+ ** @brief		Distribute arguments to proper functions.
+ **
+ ** @param[in]  fmt the list of flags indicating the type of each argument.
+ ** @param[in]  args the list of arguments to print.
+ ** @param[in]  (*opts[8])(va_list) an array of function pointers.
+ ** @return     The number of characters that passed through stdout.
+ **
  */
 
-static int	ft_read(int (*opt[8])(va_list), const char *fmt, va_list args)
+static int	ft_parse(const char *fmt, va_list args, int (*opts[8])(va_list))
 {
 	int	r;
 	int	id;
@@ -38,7 +44,7 @@ static int	ft_read(int (*opt[8])(va_list), const char *fmt, va_list args)
 				+ 6 * (*fmt == 'X')
 				+ 7 * (*fmt == 'p')
 				;
-			r += opt[id](args);
+			r += opts[id](args);
 		}
 		fmt++;
 	}
@@ -46,25 +52,40 @@ static int	ft_read(int (*opt[8])(va_list), const char *fmt, va_list args)
 }
 
 /*
- * Initialize the supported flags
+ ** @brief      Initialize array of options.
+ **
+ ** @param[in]  (*opts[8])(va_list) an array of function pointers.
+ */
+
+static void	ft_init(int (*opts[8])(va_list))
+{
+	opts[0] = ft_pct;
+	opts[1] = ft_chr;
+	opts[2] = ft_str;
+	opts[3] = ft_nbr;
+	opts[4] = ft_uns;
+	opts[5] = ft_hx1;
+	opts[6] = ft_hx2;
+	opts[7] = ft_ptr;
+}
+/*
+ ** @brief      Format and print data.
+ **
+ ** "The  functions in the printf() family produce output according to a format
+ ** as described below. The functions printf() write output to stdout."
+ **
+ ** @see        PRINTF(3) <stdio.h>
  */
 
 int	ft_printf(const char *fmt, ...)
 {
-	int		(*opt[8])(va_list);
+	int		(*opts[8])(va_list);
 	va_list	args;
 	int		r;
 
-	opt[0] = ft_pct;
-	opt[1] = ft_chr;
-	opt[2] = ft_str;
-	opt[3] = ft_nbr;
-	opt[4] = ft_uns;
-	opt[5] = ft_hx1;
-	opt[6] = ft_hx2;
-	opt[7] = ft_ptr;
+	ft_init (opts);
 	va_start (args, fmt);
-	r = ft_read (opt, fmt, args);
+	r = ft_parse (fmt, args, opts);
 	va_end (args);
 	return (r);
 }

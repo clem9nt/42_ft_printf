@@ -57,7 +57,7 @@ int		ft_ptr(va_list args);
  ** Format and print data.
  */
 
-/* static int ft_read(int (*opt[8])(va_list), const char *fmt, va_list args) */
+/* int	ft_parse(const char *fmt, va_list args, int (*opts[8])(va_list)) */
 int		ft_printf(const char *fmt, ...);
 
 #endif
